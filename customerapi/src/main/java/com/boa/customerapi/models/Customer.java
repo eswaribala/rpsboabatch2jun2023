@@ -27,7 +27,4 @@ public class Customer {
    private long contactNo;
     @Column(name="Password")
    private String password;
-
-
-
 }

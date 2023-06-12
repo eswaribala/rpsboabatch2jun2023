@@ -1,4 +1,26 @@
 package com.boa.customerapi.models;
 
-public class Individual {
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.persistence.*;
+import java.time.LocalDate;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@SuperBuilder
+@Entity
+@Table(name="Individual")
+public class Individual extends  Customer{
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    @Column(name="DOB")
+    private LocalDate dob;
+    @Column(name="Gender")
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
+
 }
