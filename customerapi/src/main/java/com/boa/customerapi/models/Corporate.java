@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Data
 @AllArgsConstructor
@@ -15,6 +16,7 @@ import javax.persistence.*;
 @EqualsAndHashCode(callSuper = false)
 @Entity
 @Table(name="Corporate")
+@XmlRootElement
 public class Corporate extends Customer{
 
     @Column(name="companyType")

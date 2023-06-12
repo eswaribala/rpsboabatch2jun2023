@@ -8,6 +8,7 @@ import lombok.experimental.SuperBuilder;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.time.LocalDate;
 
 @Data
@@ -17,6 +18,7 @@ import java.time.LocalDate;
 @Entity
 @Table(name="Individual")
 @EqualsAndHashCode(callSuper = false)
+@XmlRootElement
 public class Individual extends  Customer{
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     @Column(name="DOB")
