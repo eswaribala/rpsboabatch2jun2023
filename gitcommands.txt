@@ -1,0 +1,3 @@
+git init
+git remote add origin https://github.com/eswaribala/rpsboabatch2jun2023
+git pull origin projects
