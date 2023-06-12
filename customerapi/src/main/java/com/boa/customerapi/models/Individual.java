@@ -2,6 +2,7 @@ package com.boa.customerapi.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -15,6 +16,7 @@ import java.time.LocalDate;
 @SuperBuilder
 @Entity
 @Table(name="Individual")
+@EqualsAndHashCode(callSuper = false)
 public class Individual extends  Customer{
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     @Column(name="DOB")
