@@ -1,5 +1,6 @@
 package com.boa.customerapi.models;
 
+import io.swagger.v3.oas.annotations.Hidden;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,6 +19,7 @@ public class Customer {
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
    @Column(name="Account_No")
+   @Hidden
    private long accountNo;
    @Embedded
    private FullName name;
