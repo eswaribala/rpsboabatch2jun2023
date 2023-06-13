@@ -4,6 +4,8 @@ import com.boa.customerapi.dtos.ResponseWrapper;
 import com.boa.customerapi.models.Individual;
 import com.boa.customerapi.services.IndividualService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,10 +14,12 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/individuals")
+@RefreshScope
 public class IndividualController {
     @Autowired
     private IndividualService individualService;
-
+    @Value("${message}")
+    private String message;
    @PostMapping("/v1.0/")
    public ResponseEntity<ResponseWrapper> addIndividual(@RequestBody Individual individual){
 
@@ -31,7 +35,11 @@ public class IndividualController {
 
    @GetMapping("/v1.0/")
    public List<Individual> getAllIndividuals(){
+
+       System.out.println("Message from Property File"+message);
        return this.individualService.findAllIndividuals();
+
+
    }
     @GetMapping("/v1.0/{accountNo}")
     public ResponseEntity<ResponseWrapper> getIndividualById(@PathVariable("accountNo") long accountNo){
