@@ -27,8 +27,7 @@ public class UserAuthService implements UserDetailsService {
 	@Autowired
 	private UserService userService;
 
-	@Autowired
-	private PasswordEncoder passwordEncoder;
+
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
