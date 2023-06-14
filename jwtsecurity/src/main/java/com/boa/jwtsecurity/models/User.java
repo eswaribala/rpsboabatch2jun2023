@@ -23,7 +23,7 @@ public class User {
 
     @ManyToMany(cascade= CascadeType.ALL,fetch= FetchType.EAGER)
     @JoinTable(name = "user_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
+            joinColumns = @JoinColumn(name = "user_name"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     @JsonProperty("roles")
     @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
