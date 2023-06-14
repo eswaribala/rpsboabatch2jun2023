@@ -18,7 +18,7 @@ public class User {
     @Id
     @Column(name="User_Name",length = 50)
     private String userName;
-    @Column(name="Password",length = 10)
+    @Column(name="Password",length = 150)
     private String password;
 
     @ManyToMany(cascade= CascadeType.ALL,fetch= FetchType.EAGER)
