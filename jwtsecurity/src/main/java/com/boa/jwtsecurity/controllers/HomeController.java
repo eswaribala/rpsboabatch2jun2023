@@ -20,4 +20,18 @@ public class HomeController {
     public ResponseEntity<String> getAdmin(){
         return ResponseEntity.status(HttpStatus.OK).body("Welcome Admin");
     }
+
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+
+    @GetMapping("/v1.0/useradmin/")
+    public ResponseEntity<String> getUserOrAdmin(){
+        return ResponseEntity.status(HttpStatus.OK).body("Welcome Admin/User");
+    }
+
+    @PreAuthorize("hasRole('ANONYMOUS')")
+    @GetMapping("/v1.0/anonymous/")
+    public ResponseEntity<String> getAnonymous() {
+        return new ResponseEntity<String>("Welcome, you have USER and ADMIN role", HttpStatus.OK);
+    }
+
 }
