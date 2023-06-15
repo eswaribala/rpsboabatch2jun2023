@@ -1,0 +1,139 @@
+docker -v
+docker images
+docker container ls -a
+docker volume ls
+docker network ls
+docker login
+docker pull mongo
+docker run --name mongo-c1 -p 27017:27017 -d mongo:latest #mongo server process
+docker exec -it mongo-c1 mongo #creates mongo client
+docker logs <containerid>
+
+# pulling mysql images
+docker pull mysql
+docker run --name nec-mysql -e MYSQL_ROOT_PASSWORD=password -e MYSQL_DATABASE=necdevdb -e MYSQL_USER=demo_user -e MYSQL_PASSWORD=demo_pass -d mysql
+mysql client
+docker exec -it nec-mysql mysql -u root -p
+
+
+docker build -f dockerfile -t customerapp .
+docker run -p 7070:7070 --name customerapp-c1 --link nec-mysql:mysql -d customerapp:latest
+docker tag traderapp:latest eswaribala/vusmsjan2022:traderappv1
+docker push eswaribala/vusmsjan2022:traderappv1
+
+#build the image
+pull the project from git
+check dockerfile
+docker build -f ./Dockerfile -t invapp .
+
+
+Data Volume
+Method 1
+
+docker container run -it --tty ubuntu /bin/bash
+
+docker container run -it -v/udata --tty ubuntu /bin/bash
+
+cd udata
+touch file1.txt
+exit
+docker container restart 2eec01eb7368
+docker attach 2eec01eb7368
+exit
+docker container rm 2eec01eb7368
+docker volume ls
+
+Method 2
+Docker file sharing
+docker external storage
+docker container run -it -v G:/Local disk/dec2021/backup:/mnt/test 
+ubuntu /bin/bash
+
+docker container run -it -v E:/dockerfilesharing/project/web01:/mnt/dotnetshare ubuntu /bin/bash
+
+Method 3
+
+data volume container for data sharing
+docker run -it -v /data --name container1 busybox
+
+cd data
+touch file1.txt
+touch file2.txt
+let it be running
+open another terminal
+docker exec container1 ls /data
+
+launch another container
+docker run -it --volumes-from container1 --name container2 busybox
+
+#Read only
+docker run -it --name=Container2 --volumes-from Container1:ro ubuntu
+
+
+copy specific folder / file
+
+***** compose level possible (exclude or include)
+
+#docker multiple volumes
+# two different volume id generated
+docker run -it -v /var/volume1 -v /var/volume2 busybox
+
+
+
+Method 4
+
+docker volume create rmdatavol
+docker volume create mssqlvol
+docker volume ls
+
+docker volume inspect mssqlvol
+docker volume rm my-vol
+
+Attach volume to container
+
+docker run -it -v /mssqlvol --name msb1 busybox
+***d->detached****
+docker run -d -v /mssqlvol --name msb2 busybox
+
+docker run -it -p 8074:8070 -v/data --name appointment-c3
+--link virtusa-mysql:mysql appointmentapp:latest
+docker container inspect e350ffad6d4c
+can check volume name
+
+
+docker volume create my-vol
+docker volume ls
+
+docker volume inspect my-vol
+[
+    {
+        "Driver": "local",
+        "Labels": {},
+        "Mountpoint": "/var/lib/docker/volumes/my-vol/_data",
+        "Name": "my-vol",
+        "Options": {},
+        "Scope": "local"
+    }
+]
+--------------------------
+docker volume rm my-vol
+--------------------------------------------------------------
+-----------------------------------------------------
+docker network
+docker network ls
+docker network inspect host
+
+docker run my_container --net=my_network
+
+
+docker network inspect bridge
+
+create our own network
+
+docker network create --driver bridge my_isolated_bridge_network
+docker network create --driver bridge virtusa_network
+docker network inspect my_isolated_bridge_network
+docker network ls
+docker run --net=my_isolated_bridge_network --name=my_psql_db postgres
+docker run –it -–network=my_isolated_bridge_network ubuntu:latest /bin/bash 
+docker network inspect my_isolated_bridge_network
