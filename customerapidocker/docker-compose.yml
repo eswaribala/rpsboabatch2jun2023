@@ -1,0 +1,42 @@
+version: '3.9'
+
+services:
+  mysql:
+    image: mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=boabatch2jun2023customerdb
+    volumes:
+      - /data/mysql
+    healthcheck:        
+        interval: 30s
+        timeout: 10s
+        retries: 5
+    networks:
+      - boanetwork
+  customer-app:
+    image: customerapp
+    build:
+      context: ./
+      dockerfile: dockerfile
+    depends_on:
+      - mysql
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 15
+        window: 50s
+    ports:
+       #- 8060-8070:7070
+        - 7076:7074
+    volumes:
+      - /data/compose-app
+
+    networks:
+      - boanetwork
+
+### put all the networks here
+networks:
+  boanetwork:
+      external: true
