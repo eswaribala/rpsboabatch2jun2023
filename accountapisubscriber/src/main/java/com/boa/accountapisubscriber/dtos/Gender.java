@@ -1,4 +1,4 @@
-package com.boa.accountapisubscriber.models;
+package com.boa.accountapisubscriber.dtos;
 
 public enum Gender {
     MALE,FEMALE,TRANSGENDER
