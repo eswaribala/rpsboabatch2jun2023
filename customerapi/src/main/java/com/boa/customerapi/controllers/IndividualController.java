@@ -3,6 +3,8 @@ package com.boa.customerapi.controllers;
 import com.boa.customerapi.dtos.ResponseWrapper;
 import com.boa.customerapi.models.Individual;
 import com.boa.customerapi.services.IndividualService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +17,10 @@ import java.util.List;
 public class IndividualController {
     @Autowired
     private IndividualService individualService;
+
+
+
+    private static final Logger LOGGER = LogManager.getLogger(IndividualController.class);
 
    @PostMapping("/v1.0/")
    public ResponseEntity<ResponseWrapper> addIndividual(@RequestBody Individual individual){
@@ -31,6 +37,12 @@ public class IndividualController {
 
    @GetMapping("/v1.0/")
    public List<Individual> getAllIndividuals(){
+
+
+       LOGGER.info("Info level log message");
+       LOGGER.debug("Debug level log message");
+       LOGGER.error("Error level log message");
+
        return this.individualService.findAllIndividuals();
    }
     @GetMapping("/v1.0/{accountNo}")
