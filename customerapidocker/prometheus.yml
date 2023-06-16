@@ -36,5 +36,5 @@ scrape_configs:
     # scheme defaults to 'http'.
 
     static_configs:
-     - targets: ['host.docker.internal:7076']
+     - targets: ['host.docker.internal:7074']
      #- targets: ['localhost:7070']
