@@ -2,6 +2,7 @@ package com.boa.customerapi.controllers;
 
 import com.boa.customerapi.dtos.ResponseWrapper;
 import com.boa.customerapi.models.Individual;
+import com.boa.customerapi.services.CustomerDataPublisher;
 import com.boa.customerapi.services.IndividualService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,6 +16,8 @@ import java.util.List;
 public class IndividualController {
     @Autowired
     private IndividualService individualService;
+    @Autowired
+    private CustomerDataPublisher customerDataPublisher;
 
    @PostMapping("/v1.0/")
    public ResponseEntity<ResponseWrapper> addIndividual(@RequestBody Individual individual){
@@ -73,5 +76,19 @@ public class IndividualController {
         }
         else
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseWrapper("Individual not deleted"));
+    }
+
+
+    @PostMapping("/v1.0/")
+    public ResponseEntity<ResponseWrapper> publishCustomerData(@RequestBody Individual individual){
+
+
+
+        if(this.customerDataPublisher.publishMessage(individual)){
+            return ResponseEntity.status(HttpStatus.ACCEPTED).body(new ResponseWrapper("Message Published"));
+        }
+        else
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseWrapper("Message not created"));
+
     }
 }

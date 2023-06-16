@@ -2,6 +2,7 @@ package com.boa.customerapi.services;
 
 import com.boa.customerapi.facades.CustomerFacade;
 import com.boa.customerapi.models.Customer;
+import com.boa.customerapi.models.Individual;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.integration.support.MessageBuilder;
 import org.springframework.messaging.MessageChannel;
@@ -14,13 +15,13 @@ public class CustomerDataPublisher {
     @Autowired
     private CustomerFacade customerFacade;
 
-    public boolean publishMessage(Customer customer){
+    public boolean publishMessage(Individual individual){
 
         MessageChannel messageChannel= customerFacade.outChannel();
 
-        if(customer!=null) {
+        if(individual!=null) {
             return  messageChannel.send(MessageBuilder
-                    .withPayload(customer)
+                    .withPayload(individual)
                     .setHeader(MessageHeaders.CONTENT_TYPE,
                             MimeTypeUtils.APPLICATION_JSON)
                     .build());
