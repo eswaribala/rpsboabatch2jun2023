@@ -79,7 +79,7 @@ public class IndividualController {
     }
 
 
-    @PostMapping("/v1.0/")
+    @PostMapping("/v1.0/publish/")
     public ResponseEntity<ResponseWrapper> publishCustomerData(@RequestBody Individual individual){
 
 
