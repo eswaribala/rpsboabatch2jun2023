@@ -35,7 +35,27 @@ services:
 
     networks:
       - boanetwork
+  prometheus:
+    image: prom/prometheus
+    restart: always
+    ports:
+      - 9090:9090
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    networks:
+      - boanetwork
 
+
+  grafana:
+      image: grafana/grafana
+      #command:
+      environment:
+        - GF_SECURITY_ADMIN_PASSWORD=P@ssw0rd
+      restart: always
+      ports:
+        - 3000:3000
+      networks:
+        - boanetwork
 ### put all the networks here
 networks:
   boanetwork:
